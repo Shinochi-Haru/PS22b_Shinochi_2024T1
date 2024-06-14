@@ -1,4 +1,5 @@
-﻿# include <Siv3D.hpp> // Siv3D v0.6.14
+﻿# include <Siv3D.hpp>
+
 /*
 	よりC++ライクな書き方
 	・構造体ベース
@@ -25,7 +26,13 @@ namespace constants {
 
 	namespace ball {
 		/// @brief ボールの速さ
-		constexpr double SPEED = 480.0;
+		constexpr double SPEED = 400.0;
+		/// @brief ボールの初速度
+		constexpr double INITIAL_SPEED = 400.0;
+		/// @brief ボールの速度増加量（毎秒）
+		constexpr double SPEED_INCREMENT = 10.0;
+		/// @brief ボールの最大速度
+		constexpr double MAX_SPEED = 600.0;
 	}
 
 	namespace paddle {
@@ -43,10 +50,21 @@ public:
 	/// @brief ボール
 	Circle ball;
 
-	Ball() : velocity({ 0, -constants::ball::SPEED }), ball({ 400, 400, 8 }) {}
+	//Ball() : velocity({ 0, -constants::ball::SPEED }), ball({ 400, 400, 8 }) {}
+
+	/// @brief 経過時間
+	double elapsedTime = 0.0;
+
+	Ball() : velocity({ 0, -constants::ball::INITIAL_SPEED }), ball({ 400, 400, 8 }) {}
 
 	/// @brief 更新
 	void Update() {
+		// 経過時間を更新
+		elapsedTime += Scene::DeltaTime();
+		// 速度を増加させる（ただし最大速度を超えないようにする）
+		double newSpeed = Min(constants::ball::INITIAL_SPEED + elapsedTime * constants::ball::SPEED_INCREMENT, constants::ball::MAX_SPEED);
+		velocity.setLength(newSpeed);
+		// ボールを動かす
 		ball.moveBy(velocity * Scene::DeltaTime());
 	}
 
@@ -132,7 +150,7 @@ public:
 			ball.velocity = Vec2{
 				(ball.ball.x - paddle.center().x) * 10,
 				-ball.velocity.y
-			}.setLength(constants::ball::SPEED);
+			}.setLength(constants::ball::INITIAL_SPEED);
 		}
 	}
 
@@ -165,131 +183,74 @@ struct Wall {
 		}
 	}
 };
+// アセット名を定義
+const String FontAssetName = U"ExampleFont";
 void Main()
 {
-	//// 背景の色を設定する | Set the background color
-	//Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
-
-	//// 画像ファイルからテクスチャを作成する | Create a texture from an image file
-	//const Texture texture{ U"example/windmill.png" };
-
-	//// 絵文字からテクスチャを作成する | Create a texture from an emoji
-	//const Texture emoji{ U"🦖"_emoji };
-
-	//// 太文字のフォントを作成する | Create a bold font with MSDF method
-	//const Font font{ FontMethod::MSDF, 48, Typeface::Bold };
-
-	//// テキストに含まれる絵文字のためのフォントを作成し、font に追加する | Create a font for emojis in text and add it to font as a fallback
-	//const Font emojiFont{ 48, Typeface::ColorEmoji };
-
-	//// ボタンを押した回数 | Number of button presses
-	//font.addFallback(emojiFont);
-	//int32 count = 0;
-
-	//// チェックボックスの状態 | Checkbox state
-	//bool checked = false;
-
-	//// プレイヤーの移動スピード | Player's movement speed
-	//double speed = 200.0;
-
-	//// プレイヤーの X 座標 | Player's X position
-	//double playerPosX = 400;
-
-	//// プレイヤーが右を向いているか | Whether player is facing right
-	//bool isPlayerFacingRight = true;
-
-	//while (System::Update())
-	//{
-	//	// テクスチャを描く | Draw the texture
-	//	texture.draw(20, 20);
-
-	//	// テキストを描く | Draw text
-	//	font(U"Hello, Siv3D!🎮").draw(64, Vec2{ 20, 340 }, ColorF{ 0.2, 0.4, 0.8 });
-
-	//	// 指定した範囲内にテキストを描く | Draw text within a specified area
-	//	font(U"Siv3D (シブスリーディー) は、ゲームやアプリを楽しく簡単な C++ コードで開発できるフレームワークです。")
-	//		.draw(18, Rect{ 20, 430, 480, 200 }, Palette::Black);
-
-	//	// 長方形を描く | Draw a rectangle
-	//	Rect{ 540, 20, 80, 80 }.draw();
-
-	//	// 角丸長方形を描く | Draw a rounded rectangle
-	//	RoundRect{ 680, 20, 80, 200, 20 }.draw(ColorF{ 0.0, 0.4, 0.6 });
-
-	//	// 円を描く | Draw a circle
-	//	Circle{ 580, 180, 40 }.draw(Palette::Seagreen);
-
-	//	// 矢印を描く | Draw an arrow
-	//	Line{ 540, 330, 760, 260 }.drawArrow(8, SizeF{ 20, 20 }, ColorF{ 0.4 });
-
-	//	// 半透明の円を描く | Draw a semi-transparent circle
-	//	Circle{ Cursor::Pos(), 40 }.draw(ColorF{ 1.0, 0.0, 0.0, 0.5 });
-
-	//	// ボタン | Button
-	//	if (SimpleGUI::Button(U"count: {}"_fmt(count), Vec2{ 520, 370 }, 120, (checked == false)))
-	//	{
-	//		// カウントを増やす | Increase the count
-	//		++count;
-	//	}
-
-	//	// チェックボックス | Checkbox
-	//	SimpleGUI::CheckBox(checked, U"Lock \U000F033E", Vec2{ 660, 370 }, 120);
-
-	//	// スライダー | Slider
-	//	SimpleGUI::Slider(U"speed: {:.1f}"_fmt(speed), speed, 100, 400, Vec2{ 520, 420 }, 140, 120);
-
-	//	// 左キーが押されていたら | If left key is pressed
-	//	if (KeyLeft.pressed())
-	//	{
-	//		// プレイヤーが左に移動する | Player moves left
-	//		playerPosX = Max((playerPosX - speed * Scene::DeltaTime()), 60.0);
-	//		isPlayerFacingRight = false;
-	//	}
-
-	//	// 右キーが押されていたら | If right key is pressed
-	//	if (KeyRight.pressed())
-	//	{
-	//		// プレイヤーが右に移動する | Player moves right
-	//		playerPosX = Min((playerPosX + speed * Scene::DeltaTime()), 740.0);
-	//		isPlayerFacingRight = true;
-	//	}
-
-	//	// プレイヤーを描く | Draw the player
-	//	emoji.scaled(0.75).mirrored(isPlayerFacingRight).drawAt(playerPosX, 540);
-
 	Bricks bricks;
 	Ball ball;
 	Paddle paddle;
 
+	// フォントアセットを登録
+	FontAsset::Register(FontAssetName, 30);
+
 	while (System::Update())
 	{
-		//==============================
-		// 更新
-		//==============================
-		paddle.Update();
-		ball.Update();
+		// ゲームオーバーフラグ
+		bool gameOver = false;
 
-		//==============================
-		// コリジョン
-		//==============================
-		bricks.Intersects(ball);
-		Wall::Intersects(ball);
-		paddle.Intersects(ball);
+		while (System::Update())
+		{
+			// ゲームオーバーでない場合のみ更新
+			if (!gameOver)
+			{
+				// ... (更新とコリジョンの処理は変更なし) ...
 
-		//==============================
-		// 描画
-		//==============================
-		bricks.Draw();
-		ball.Draw();
-		paddle.Draw();
+				// ボールが画面下端を超えたらゲームオーバー
+				if (ball.ball.y > Scene::Height())
+				{
+					gameOver = true;
+				}
+			}
+			//==============================
+			// 更新
+			//==============================
+			paddle.Update();
+			ball.Update();
+
+			//==============================
+			// コリジョン
+			//==============================
+			bricks.Intersects(ball);
+			Wall::Intersects(ball);
+			paddle.Intersects(ball);
+
+			//==============================
+			// 描画
+			//==============================
+			bricks.Draw();
+			ball.Draw();
+			paddle.Draw();
+
+			// ゲームオーバー時の処理
+			if (gameOver)
+			{
+				// フォントアセットを使用してテキストを描画
+				if (FontAsset::IsRegistered(FontAssetName))
+				{
+					FontAsset(FontAssetName)(U"GameOver").draw(Arg::center(Scene::Center()));
+				}
+
+				// Rキーを押すとリスタート
+				if (KeyR.down())
+				{
+					gameOver = false;
+					// ゲームの状態をリセット
+					bricks = Bricks();
+					ball = Ball();
+					paddle = Paddle();
+				}
+			}
+		}
 	}
 }
-//
-// - Debug ビルド: プログラムの最適化を減らす代わりに、エラーやクラッシュ時に詳細な情報を得られます。
-//
-// - Release ビルド: 最大限の最適化でビルドします。
-//
-// - [デバッグ] メニュー → [デバッグの開始] でプログラムを実行すると、[出力] ウィンドウに詳細なログが表示され、エラーの原因を探せます。
-//
-// - Visual Studio を更新した直後は、プログラムのリビルド（[ビルド]メニュー → [ソリューションのリビルド]）が必要な場合があります。
-//

@@ -5,6 +5,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{9A176DC4-BBD8-485B-8D0C-F2CB431F0F2D}|PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1.vcxproj|C:\\Users\\vantan\\source\\repos\\PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9A176DC4-BBD8-485B-8D0C-F2CB431F0F2D}|PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1.vcxproj|solutionrelative:PS22b_Shinochi_2024T1\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A176DC4-BBD8-485B-8D0C-F2CB431F0F2D}|PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1.vcxproj|C:\\Users\\vantan\\source\\repos\\PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1\\BallController.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9A176DC4-BBD8-485B-8D0C-F2CB431F0F2D}|PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1.vcxproj|solutionrelative:PS22b_Shinochi_2024T1\\BallController.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A176DC4-BBD8-485B-8D0C-F2CB431F0F2D}|PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1.vcxproj|C:\\Users\\vantan\\source\\repos\\PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1\\BallController.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9A176DC4-BBD8-485B-8D0C-F2CB431F0F2D}|PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1.vcxproj|solutionrelative:PS22b_Shinochi_2024T1\\BallController.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +22,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BallController.cpp",
+              "DocumentMoniker": "C:\\Users\\vantan\\source\\repos\\PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1\\BallController.cpp",
+              "RelativeDocumentMoniker": "PS22b_Shinochi_2024T1\\BallController.cpp",
+              "ToolTip": "C:\\Users\\vantan\\source\\repos\\PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1\\BallController.cpp",
+              "RelativeToolTip": "PS22b_Shinochi_2024T1\\BallController.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-08T05:02:06.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BallController.h",
+              "DocumentMoniker": "C:\\Users\\vantan\\source\\repos\\PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1\\BallController.h",
+              "RelativeDocumentMoniker": "PS22b_Shinochi_2024T1\\BallController.h",
+              "ToolTip": "C:\\Users\\vantan\\source\\repos\\PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1\\BallController.h",
+              "RelativeToolTip": "PS22b_Shinochi_2024T1\\BallController.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-08T04:42:52.358Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +57,7 @@
               "RelativeDocumentMoniker": "PS22b_Shinochi_2024T1\\Main.cpp",
               "ToolTip": "C:\\Users\\vantan\\source\\repos\\PS22b_Shinochi_2024T1\\PS22b_Shinochi_2024T1\\Main.cpp",
               "RelativeToolTip": "PS22b_Shinochi_2024T1\\Main.cpp",
-              "ViewState": "AQIAAP8AAAAAAAAAAAAEwKgAAAAAAAAA",
+              "ViewState": "AQIAAOoAAAAAAAAAAAAAAPAAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-04-27T02:54:49.399Z",
               "EditorCaption": ""
